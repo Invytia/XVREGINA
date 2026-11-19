@@ -11,7 +11,7 @@
 html,body{width:100%;font-family:'Montserrat',sans-serif;color:var(--text);background:var(--cream);overflow-x:hidden;scroll-behavior:smooth}
 /* Fondo del cuerpo: f2.jpg fijo */
 body::before{content:'';position:fixed;inset:0;background:url('assets/f2.jpg') center/cover no-repeat;z-index:-2}
-body::after{content:'';position:fixed;inset:0;background:rgba(246,240,226,.35);z-index:-1}
+body::after{content:'';position:fixed;inset:0;background:rgba(246,240,226,.08);z-index:-1}
 #fx{position:fixed;inset:0;pointer-events:none;z-index:1500}
 .sp{position:absolute;border-radius:50%;background:radial-gradient(circle,#fff 0%,var(--gold-l) 40%,transparent 70%);animation:fall linear forwards}
 @keyframes fall{0%{transform:translateY(-20px) scale(.4);opacity:0}15%{opacity:1}100%{transform:translateY(105vh) translateX(var(--dx)) scale(1.1) rotate(180deg);opacity:0}}
@@ -54,9 +54,9 @@ body.content-active #main{display:flex}
 .up{transform:translateY(40px)}.zm{transform:scale(.9)}.lf{transform:translateX(-40px)}.rt{transform:translateX(40px)}
 .an.in{opacity:1;transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.25s}.d3{transition-delay:.4s}.d4{transition-delay:.55s}
-section{width:100%;padding:70px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden;background:rgba(250,245,232,.7);backdrop-filter:blur(2px)}
-section.alt{background:rgba(230,213,184,.6)}
-section.dark{background:rgba(41,45,22,.86);color:#fff}
+section{width:100%;padding:70px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden;background:rgba(250,245,232,.38)}
+section.alt{background:rgba(230,213,184,.32)}
+section.dark{background:rgba(41,45,22,.62);color:#fff}
 section::before{content:'';position:absolute;inset:14px;border:1px solid rgba(201,162,77,.45);pointer-events:none}
 .tag{font-family:'Cinzel',serif;font-size:13px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:500;position:relative;z-index:4}
 .script{font-family:'Pinyon Script',cursive;font-size:clamp(66px,23vw,104px);line-height:1.3;position:relative;z-index:4}
@@ -99,6 +99,7 @@ section::before{content:'';position:absolute;inset:14px;border:1px solid rgba(20
 .map{width:100%;max-width:500px;height:280px;margin:22px auto;position:relative;z-index:4;border:1px solid var(--gold);background:var(--beige)}
 .map iframe{width:100%;height:100%;border:0}
 /* Itinerario */
+.gift{margin:12px 0;filter:drop-shadow(0 0 8px rgba(240,217,140,.8));animation:bob 4s ease-in-out infinite}
 .pend{border:1px dashed var(--gold);padding:22px 28px;max-width:400px;position:relative;z-index:4;margin-top:20px}
 /* Paleta */
 .pal{display:flex;flex-wrap:wrap;justify-content:center;gap:26px;margin-top:26px;position:relative;z-index:4}
@@ -222,7 +223,7 @@ select.inp{appearance:none;text-align-last:center;cursor:pointer}
   <!-- Regalos -->
   <section class="alt">
     <div class="an up d1 title">Mesa de Regalos</div>
-    <div class="an zm d2 shimmer" style="font-size:44px;margin:8px 0">✉</div>
+    <div class="an zm d2 gift"><svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="url(#goldg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="24" width="48" height="12" rx="2"/><path d="M12 36v20h40V36M32 24v32"/><path d="M32 24c-4-12-18-12-18-5s12 5 18 5zM32 24c4-12 18-12 18-5s-12 5-18 5z"/></svg></div>
     <p class="an up d3 serif" style="font-size:21px">El regalo más hermoso es tu presencia. Si deseas tener un detalle adicional conmigo, habrá un cofre en la recepción para tu lluvia de sobres o bien, puedes sorprenderme con un obsequio especial.</p>
     <div class="an up d4 photo"><img src="assets/7.jpg" alt="Regalos" onerror="this.parentNode.style.display='none'"></div>
   </section>
