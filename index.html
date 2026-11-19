@@ -8,10 +8,12 @@
 <style>
 :root{--cream:#F6F0E2;--olive:#5F6430;--olive-d:#2F3318;--gold:#C9A24D;--gold-l:#F0D98C;--beige:#E6D5B8;--text:#2B2D18;--muted:#585A3E;--ease:cubic-bezier(.25,1,.5,1)}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{width:100%;font-family:'Montserrat',sans-serif;color:var(--text);background:var(--cream);overflow-x:hidden;scroll-behavior:smooth}
+html,body{width:100%;font-family:'Montserrat',sans-serif;color:var(--text);overflow-x:hidden;scroll-behavior:smooth}
+html{background:var(--cream)}
+body{background:transparent}
 /* Fondo del cuerpo: f2.jpg fijo */
 body::before{content:'';position:fixed;inset:0;background:url('assets/f2.jpg') center/cover no-repeat;z-index:-2}
-body::after{content:'';position:fixed;inset:0;background:rgba(246,240,226,.08);z-index:-1}
+body::after{content:'';position:fixed;inset:0;background:rgba(246,240,226,.04);z-index:-1}
 #fx{position:fixed;inset:0;pointer-events:none;z-index:1500}
 .sp{position:absolute;border-radius:50%;background:radial-gradient(circle,#fff 0%,var(--gold-l) 40%,transparent 70%);animation:fall linear forwards}
 @keyframes fall{0%{transform:translateY(-20px) scale(.4);opacity:0}15%{opacity:1}100%{transform:translateY(105vh) translateX(var(--dx)) scale(1.1) rotate(180deg);opacity:0}}
@@ -54,9 +56,9 @@ body.content-active #main{display:flex}
 .up{transform:translateY(40px)}.zm{transform:scale(.9)}.lf{transform:translateX(-40px)}.rt{transform:translateX(40px)}
 .an.in{opacity:1;transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.25s}.d3{transition-delay:.4s}.d4{transition-delay:.55s}
-section{width:100%;padding:70px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden;background:rgba(250,245,232,.38)}
-section.alt{background:rgba(230,213,184,.32)}
-section.dark{background:rgba(41,45,22,.62);color:#fff}
+section{width:100%;padding:70px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden;background:rgba(250,245,232,.22)}
+section.alt{background:rgba(230,213,184,.16)}
+section.dark{background:rgba(41,45,22,.5);color:#fff}
 section::before{content:'';position:absolute;inset:14px;border:1px solid rgba(201,162,77,.45);pointer-events:none}
 .tag{font-family:'Cinzel',serif;font-size:13px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:500;position:relative;z-index:4}
 .script{font-family:'Pinyon Script',cursive;font-size:clamp(66px,23vw,104px);line-height:1.3;position:relative;z-index:4}
