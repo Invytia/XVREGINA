@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mis XV Años - Regina</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Pinyon+Script&family=Montserrat:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F6F0E2;--olive:#5F6430;--olive-d:#2F3318;--gold:#C9A24D;--gold-l:#F0D98C;--beige:#E6D5B8;--text:#2B2D18;--muted:#585A3E;--ease:cubic-bezier(.25,1,.5,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;font-family:'Montserrat',sans-serif;color:var(--text);background:var(--cream);overflow-x:hidden;scroll-behavior:smooth}
+/* Fondo del cuerpo: f2.jpg fijo */
+body::before{content:'';position:fixed;inset:0;background:url('assets/f2.jpg') center/cover no-repeat;z-index:-2}
+body::after{content:'';position:fixed;inset:0;background:rgba(246,240,226,.35);z-index:-1}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:1500}
+.sp{position:absolute;border-radius:50%;background:radial-gradient(circle,#fff 0%,var(--gold-l) 40%,transparent 70%);animation:fall linear forwards}
+@keyframes fall{0%{transform:translateY(-20px) scale(.4);opacity:0}15%{opacity:1}100%{transform:translateY(105vh) translateX(var(--dx)) scale(1.1) rotate(180deg);opacity:0}}
+.burst{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--gold-l);box-shadow:0 0 10px 3px var(--gold);animation:burst 1.4s ease-out forwards}
+@keyframes burst{to{transform:translate(var(--bx),var(--by)) scale(.2);opacity:0}}
+.shimmer{background:linear-gradient(100deg,var(--gold) 20%,#fff6c9 40%,var(--gold) 60%,#a77f2e 80%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent!important;animation:shim 4s linear infinite;filter:drop-shadow(0 2px 6px rgba(201,162,77,.35))}
+@keyframes shim{to{background-position:-250% 0}}
+
+/* Sobre */
+#envelope-screen{position:fixed;inset:0;background:var(--cream) url('assets/fondo.jpg') center/cover no-repeat;z-index:1000;display:flex;flex-direction:column;justify-content:center;align-items:center;transition:opacity 1.4s,visibility 1.4s}
+#envelope-screen.fade-out{opacity:0;visibility:hidden;pointer-events:none}
+.env-text{text-align:center;margin-bottom:45px;animation:floaty 4s ease-in-out infinite;position:relative;z-index:10}
+.env-tag{font-family:'Cinzel',serif;font-size:14px;letter-spacing:8px;text-transform:uppercase;color:var(--olive-d);font-weight:600;background:rgba(246,240,226,.8);padding:5px 15px;display:inline-block}
+.env-title{font-family:'Pinyon Script',cursive;font-size:88px;line-height:1.2;margin-top:5px;text-shadow:0 0 25px rgba(255,255,255,.9)}
+.envelope-wrapper{position:relative;cursor:pointer;transition:transform .6s var(--ease);z-index:10;animation:glow 2.8s ease-in-out infinite}
+.envelope-wrapper:hover{transform:translateY(-8px)}
+@keyframes glow{50%{filter:drop-shadow(0 0 22px rgba(240,217,140,.95))}}
+.envelope{position:relative;width:320px;height:210px;background:#fff;box-shadow:0 15px 35px rgba(0,0,0,.18);border:1px solid rgba(0,0,0,.05)}
+.envelope::before{content:'';position:absolute;top:0;right:0;border-right:160px solid #f7f5ee;border-top:105px solid transparent;border-bottom:105px solid #f7f5ee;z-index:2}
+.envelope::after{content:'';position:absolute;top:0;left:0;border-left:160px solid #fff;border-top:105px solid transparent;border-bottom:105px solid #fff;z-index:2}
+.front-flap{position:absolute;top:0;left:0;border-left:160px solid transparent;border-right:160px solid transparent;border-top:115px solid #ece8da;transform-origin:top;transition:transform .9s var(--ease);z-index:4}
+.envelope-wrapper.open .front-flap{transform:rotateX(180deg);z-index:1}
+.seal{position:absolute;top:85px;left:50%;transform:translateX(-50%);width:62px;height:62px;border-radius:50%;z-index:5;display:flex;align-items:center;justify-content:center;font-family:'Pinyon Script',cursive;font-size:34px;color:#fff6c9;background:radial-gradient(circle at 30% 30%,#e8c875,var(--gold) 60%,#8c6a22);box-shadow:0 4px 12px rgba(0,0,0,.3);transition:all .5s;pointer-events:none}
+.envelope-wrapper.open .seal{opacity:0;transform:translateX(-50%) scale(.4)}
+.hint{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:4px;color:var(--olive-d);margin-top:40px;animation:pulse 2.5s infinite;z-index:10;background:rgba(246,240,226,.8);padding:5px 15px}
+@keyframes pulse{50%{opacity:.4}}
+@keyframes floaty{50%{transform:translateY(-6px)}}
+
+/* Música */
+.music-btn{position:fixed;bottom:26px;right:26px;width:50px;height:50px;border-radius:50%;background:var(--gold);border:none;display:flex;justify-content:center;align-items:center;box-shadow:0 0 0 0 rgba(201,162,77,.6);z-index:2000;cursor:pointer;opacity:0;visibility:hidden;transition:all .6s;animation:ring 2.4s infinite}
+body.content-active .music-btn{opacity:1;visibility:visible}
+@keyframes ring{70%{box-shadow:0 0 0 16px rgba(201,162,77,0)}}
+.music-btn svg{width:18px;height:18px;fill:#fff}
+
+/* Contenido */
+#main{display:none;width:100%;flex-direction:column;align-items:center;opacity:0;animation:fin 2s forwards .3s}
+body.content-active #main{display:flex}
+@keyframes fin{to{opacity:1}}
+.an{opacity:0;transition:all 1.2s var(--ease);position:relative;z-index:2}
+.up{transform:translateY(40px)}.zm{transform:scale(.9)}.lf{transform:translateX(-40px)}.rt{transform:translateX(40px)}
+.an.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.25s}.d3{transition-delay:.4s}.d4{transition-delay:.55s}
+section{width:100%;padding:70px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden;background:rgba(250,245,232,.7);backdrop-filter:blur(2px)}
+section.alt{background:rgba(230,213,184,.6)}
+section.dark{background:rgba(41,45,22,.86);color:#fff}
+section::before{content:'';position:absolute;inset:14px;border:1px solid rgba(201,162,77,.45);pointer-events:none}
+.tag{font-family:'Cinzel',serif;font-size:13px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:500;position:relative;z-index:4}
+.script{font-family:'Pinyon Script',cursive;font-size:104px;line-height:1.1;position:relative;z-index:4}
+.serif{font-family:'Cormorant Garamond',serif;font-size:23px;line-height:1.6;color:var(--muted);font-style:italic;max-width:540px;padding:0 12px;position:relative;z-index:4}
+.dark .serif{color:#e4dfc9}
+.title{font-family:'Cinzel',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--olive);margin-bottom:10px;font-weight:600;position:relative;z-index:4}
+.dark .title{color:var(--gold)}
+.data{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:500;line-height:1.3;margin-bottom:5px;position:relative;z-index:4}
+.dark .data{color:#fff}
+.orn{width:70px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:26px auto;position:relative;z-index:4}
+.orn::after{content:'✦';position:absolute;left:50%;top:50%;transform:translate(-50%,-52%);color:var(--gold);font-size:14px;background:transparent;text-shadow:0 0 8px var(--gold)}
+/* Fotos completas, sin recorte */
+.photo{width:100%;max-width:420px;margin:34px auto;position:relative;z-index:2;box-shadow:0 18px 45px rgba(47,51,24,.25);border:6px solid #fff;overflow:hidden}
+.photo img{width:100%;height:auto;display:block}
+.photo::after{content:'';position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:sweep 5s ease-in-out infinite}
+@keyframes sweep{0%,60%{left:-80%}100%{left:140%}}
+.btn{display:inline-block;background:var(--olive-d);color:var(--gold-l);padding:16px 30px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:500;letter-spacing:3px;text-transform:uppercase;text-decoration:none;border:1px solid var(--gold);cursor:pointer;transition:all .4s;margin-top:22px;position:relative;z-index:5;overflow:hidden}
+.btn:hover{background:var(--gold);color:#fff;transform:translateY(-3px);box-shadow:0 10px 24px rgba(201,162,77,.45)}
+.btn::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);animation:sweep2 3.5s infinite}
+@keyframes sweep2{60%,100%{left:160%}}
+/* Cuenta atrás */
+.count{display:flex;gap:12px;justify-content:center;margin:28px auto 10px;position:relative;z-index:4}
+.cbox{width:74px;padding:14px 4px;background:var(--olive-d);border:1px solid var(--gold);box-shadow:0 0 18px rgba(201,162,77,.35)}
+.cbox b{display:block;font-family:'Cinzel',serif;font-size:30px;color:var(--gold-l);font-weight:600}
+.cbox span{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#d8d3b8}
+/* Calendario */
+.cal{width:100%;max-width:320px;margin:26px auto;position:relative;z-index:4}
+.cal-m{font-family:'Cinzel',serif;font-size:20px;letter-spacing:4px;text-transform:uppercase;margin-bottom:20px;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.ch{font-size:11px;font-weight:600;color:var(--gold);padding-bottom:8px}
+.cd{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:var(--muted);display:flex;justify-content:center;align-items:center;aspect-ratio:1}
+.cd.on{background:var(--olive);color:#fff;border-radius:50%;font-weight:600;animation:beat 2s infinite}
+@keyframes beat{0%,100%{box-shadow:0 0 0 0 rgba(95,100,48,.6)}50%{box-shadow:0 0 0 10px rgba(201,162,77,0),0 0 14px rgba(201,162,77,.7)}}
+.map{width:100%;max-width:500px;height:280px;margin:22px auto;position:relative;z-index:4;border:1px solid var(--gold);background:var(--beige)}
+.map iframe{width:100%;height:100%;border:0}
+/* Itinerario */
+.pend{border:1px dashed var(--gold);padding:22px 28px;max-width:400px;position:relative;z-index:4;margin-top:20px}
+/* Paleta */
+.pal{display:flex;flex-wrap:wrap;justify-content:center;gap:26px;margin-top:26px;position:relative;z-index:4}
+.cc{width:60px;height:60px;border-radius:50%;border:2px solid var(--gold-l);box-shadow:0 0 16px rgba(240,217,140,.5);animation:bob 4s ease-in-out infinite}
+.pal div:nth-child(2) .cc{animation-delay:.6s}.pal div:nth-child(3) .cc{animation-delay:1.2s}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.cn{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;margin-top:10px;color:#ddd}
+/* Formularios */
+.fg{width:100%;max-width:400px;margin:0 auto 18px;position:relative;z-index:4}
+.inp{width:100%;padding:15px 0;background:transparent;border:none;border-bottom:1px solid rgba(201,162,77,.7);color:var(--text);font-family:'Montserrat',sans-serif;font-size:14px;outline:none;text-align:center}
+.inp:focus{border-bottom-color:var(--olive)}
+.inp:disabled{color:var(--olive);font-weight:500}
+textarea.inp{resize:vertical;min-height:80px}
+select.inp{appearance:none;text-align-last:center;cursor:pointer}
+.ticket{width:100%;max-width:400px;margin:20px auto;background:var(--olive-d);padding:50px 25px;position:relative;border:1px solid var(--gold);box-shadow:0 20px 40px rgba(0,0,0,.2),0 0 28px rgba(201,162,77,.3);z-index:4}
+.ticket::before{content:'';position:absolute;inset:12px;border:1px solid rgba(201,162,77,.35)}
+@media(max-width:400px){.env-title{font-size:72px}.script{font-size:84px}.data{font-size:27px}.envelope{width:300px;height:195px}.envelope::before,.envelope::after{border-left-width:150px;border-right-width:150px;border-top-width:97px;border-bottom-width:97px}.front-flap{border-left-width:150px;border-right-width:150px;border-top-width:105px}.cbox{width:64px}.cbox b{font-size:25px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.an{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="fx"></div>
+<audio id="bg-music" src="assets/song.mp3" loop></audio>
+<button id="music-btn" class="music-btn" onclick="toggleMusic()" aria-label="Controlar música">
+  <svg id="ip" style="display:none" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+  <svg id="ia" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+</button>
+
+<div id="envelope-screen">
+  <div class="env-text"><div class="env-tag">Mis XV Años</div><h1 class="env-title shimmer">Regina</h1></div>
+  <div class="envelope-wrapper" onclick="openEnvelope()">
+    <div class="front-flap"></div><div class="seal">R</div><div class="envelope"></div>
+  </div>
+  <div class="hint">Tocar para abrir</div>
+</div>
+
+<main id="main">
+  <!-- Portada -->
+  <section>
+    <div class="an up d1"><div class="tag">Mis XV Años</div><h1 class="script shimmer">Regina</h1>
+    <p class="serif" style="margin:18px auto 0">Una nueva ilusión y mil sueños por cumplir. Quiero hacer de esta noche un recuerdo inolvidable, y qué mejor que compartirlo con personas que forman parte de mi vida. Será un placer contar con tu presencia. ✨</p></div>
+    <div class="an zm d3 photo"><img src="assets/1.jpg" alt="Regina" onerror="this.parentNode.style.display='none'"></div>
+  </section>
+
+  <!-- Fecha, cuenta atrás y calendario -->
+  <section class="alt">
+    <div class="an up d1 title">Será un honor contar con tu presencia el</div>
+    <div class="an up d2 data shimmer" style="font-size:44px;font-weight:600">15 de Enero</div>
+    <div class="an up d3 data" style="font-size:26px;color:var(--gold);letter-spacing:3px">2027</div>
+    <div class="an zm d3 count" id="count">
+      <div class="cbox"><b id="cd-d">0</b><span>Días</span></div><div class="cbox"><b id="cd-h">0</b><span>Horas</span></div>
+      <div class="cbox"><b id="cd-m">0</b><span>Min</span></div><div class="cbox"><b id="cd-s">0</b><span>Seg</span></div>
+    </div>
+    <div class="an zm d4 cal">
+      <div class="cal-m">Enero</div>
+      <div class="grid">
+        <div class="ch">D</div><div class="ch">L</div><div class="ch">M</div><div class="ch">M</div><div class="ch">J</div><div class="ch">V</div><div class="ch">S</div>
+        <div></div><div></div><div></div><div></div><div></div>
+        <div class="cd">1</div><div class="cd">2</div>
+        <div class="cd">3</div><div class="cd">4</div><div class="cd">5</div><div class="cd">6</div><div class="cd">7</div><div class="cd">8</div><div class="cd">9</div>
+        <div class="cd">10</div><div class="cd">11</div><div class="cd">12</div><div class="cd">13</div><div class="cd">14</div><div class="cd on">15</div><div class="cd">16</div>
+        <div class="cd">17</div><div class="cd">18</div><div class="cd">19</div><div class="cd">20</div><div class="cd">21</div><div class="cd">22</div><div class="cd">23</div>
+        <div class="cd">24</div><div class="cd">25</div><div class="cd">26</div><div class="cd">27</div><div class="cd">28</div><div class="cd">29</div><div class="cd">30</div>
+        <div class="cd">31</div>
+      </div>
+    </div>
+    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+A%C3%B1os+de+Regina&dates=20270115/20270116&details=Celebremos+juntos+este+d%C3%ADa+tan+especial" target="_blank" class="an up d4 btn">Agendar Evento</a>
+    <div class="an up d4 photo"><img src="assets/2.jpg" alt="Regina" onerror="this.parentNode.style.display='none'"></div>
+  </section>
+
+  <!-- Familia -->
+  <section>
+    <div class="an up d1" style="position:relative;z-index:4">
+      <div class="title">Con el amor de mis padres</div>
+      <div class="data">Guadalupe Ivonne</div>
+      <div class="shimmer" style="font-family:'Cinzel',serif;font-size:22px;margin:12px 0">&</div>
+      <div class="data">Carlos Alberto</div>
+      <div class="orn"></div>
+      <div class="title">Y mis Padrinos</div>
+      <div class="data" style="font-size:26px">Eva Romero</div>
+      <div class="data" style="font-size:26px">Soledad Espinosa y Luciano García</div>
+    </div>
+    <div class="an lf d3 photo"><img src="assets/3.jpg" alt="Familia" onerror="this.parentNode.style.display='none'"></div>
+  </section>
+
+  <!-- Itinerario -->
+  <section class="alt">
+    <div class="an up d1 title">Itinerario</div>
+    <div class="an up d2 data" style="font-size:40px">Nuestro Día</div>
+    <div class="an zm d3 pend"><div class="serif" style="padding:0">El programa de la celebración está por confirmar. Muy pronto lo compartiremos aquí. ✨</div></div>
+    <div class="an rt d3 photo"><img src="assets/4.jpg" alt="Itinerario" onerror="this.parentNode.style.display='none'"></div>
+  </section>
+
+  <!-- Ubicación -->
+  <section>
+    <div class="an up d1 title">Ceremonia y Recepción</div>
+    <div class="an up d2 data">En el salón</div>
+    <p class="an up d3 serif" style="font-size:20px;margin-top:6px">Todo el festejo será en un mismo lugar.</p>
+    <div class="an zm d4 map" id="map-box"><iframe id="map-frame" title="Mapa" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+    <a href="https://maps.app.goo.gl/VjCGaJrtPjrYcBkX8?g_st=ic" target="_blank" class="an up d4 btn">Ver Ubicación</a>
+    <div class="an up d4 photo" style="margin-top:40px"><img src="assets/5.jpg" alt="Ubicación" onerror="this.parentNode.style.display='none'"></div>
+  </section>
+
+  <!-- Dress code -->
+  <section class="dark">
+    <div class="an up d1 title">Dress Code</div>
+    <div class="an up d2 data shimmer" style="font-family:'Cinzel',serif;font-size:34px;letter-spacing:6px;margin:12px 0">FORMAL</div>
+    <p class="an up d3 serif" style="font-size:21px">Te invitamos a acompañarme con un atuendo formal. Esta es la paleta que acompaña mi celebración.</p>
+    <div class="an zm d4 pal">
+      <div><div class="cc" style="background:#6B7036"></div><div class="cn">Verde olivo</div></div>
+      <div><div class="cc" style="background:#C9A24D"></div><div class="cn">Dorado</div></div>
+      <div><div class="cc" style="background:#E6D5B8"></div><div class="cn">Beige</div></div>
+    </div>
+    <div class="an up d4 photo"><img src="assets/6.jpg" alt="Dress code" onerror="this.parentNode.style.display='none'"></div>
+  </section>
+
+  <!-- Regalos -->
+  <section class="alt">
+    <div class="an up d1 title">Mesa de Regalos</div>
+    <div class="an zm d2 shimmer" style="font-size:44px;margin:8px 0">✉</div>
+    <p class="an up d3 serif" style="font-size:21px">El regalo más hermoso es tu presencia. Si deseas tener un detalle adicional conmigo, habrá un cofre en la recepción para tu lluvia de sobres o bien, puedes sorprenderme con un obsequio especial.</p>
+    <div class="an up d4 photo"><img src="assets/7.jpg" alt="Regalos" onerror="this.parentNode.style.display='none'"></div>
+  </section>
+
+  <!-- Momentos -->
+  <section>
+    <div class="an up d1 title">Momentos</div>
+    <div class="an up d2 data" style="font-size:36px">Mis XV Años</div>
+    <div class="orn"></div>
+    <div class="an lf d3 photo" style="margin-top:10px"><img src="assets/8.jpg" alt="Regina" onerror="this.parentNode.style.display='none'"></div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="alt">
+    <div class="an up d1 photo" style="margin-top:0"><img src="assets/9.jpg" alt="Regina" onerror="this.parentNode.style.display='none'"></div>
+
+    <div id="pases" style="display:none;width:100%;display:none;flex-direction:column;align-items:center">
+      <div class="an up d1 title" style="margin-top:20px">Acceso al Evento</div>
+      <div class="an zm d2 ticket">
+        <div class="tag">Boleto VIP</div>
+        <div id="t-name" style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#fff;font-style:italic;margin:15px 0;position:relative;z-index:2">Invitado Especial</div>
+        <div class="serif" style="font-size:18px;color:#ccc;padding:0">Pases Asignados</div>
+        <div id="t-count" class="shimmer" style="font-family:'Cinzel',serif;font-size:65px;font-weight:600;line-height:1.1;position:relative;z-index:2">0</div>
+        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#aaa;margin-top:26px;position:relative;z-index:2">Muestra esta pantalla al llegar</div>
+      </div>
+    </div>
+
+    <div class="an up d1 title" style="margin-top:40px">RSVP</div>
+    <div class="an up d2 data" style="font-size:36px">Confirmar Asistencia</div>
+    <p class="an up d3 serif" style="margin:14px auto 28px;font-size:20px">Agradeceremos tu confirmación lo antes posible.</p>
+    <div class="an up d4 fg"><input type="text" id="rsvp-name" class="inp" placeholder="Tu nombre y apellido"></div>
+    <div class="an up d4 fg"><select id="rsvp-status" class="inp"><option value="" disabled selected>¿Nos acompañarás?</option><option value="yes">Con gusto asistiré</option><option value="no">No me será posible asistir</option></select></div>
+    <div class="an up d4 fg"><select id="rsvp-guests" class="inp" style="display:none"></select></div>
+    <button onclick="sendRSVP()" class="an up d4 btn">Confirmar por WhatsApp</button>
+
+    <div class="an up d1 title" style="margin-top:60px">Mensajes</div>
+    <div class="an up d2 data" style="font-size:36px">Muro de los Deseos</div>
+    <div class="an up d3 fg" style="margin-top:22px"><input type="text" id="wish-name" class="inp" placeholder="De parte de..."></div>
+    <div class="an up d4 fg"><textarea id="wish-message" class="inp" placeholder="Deja un lindo mensaje para Regina..."></textarea></div>
+    <button onclick="sendWish()" class="an up d4 btn">Enviar Mensaje</button>
+    <div class="an up d4 shimmer script" style="font-size:60px;margin-top:50px">Regina</div>
+  </section>
+</main>
+
+<script>
+/* ===== CONFIGURACIÓN ===== */
+const PHONE = "525572254181";
+const EVENT_DATE = new Date("2027-01-15T00:00:00-06:00"); // Ajusta la hora cuando la clienta la confirme
+// Pega aquí el "src" del embed de Google Maps (Compartir > Insertar un mapa):
+const MAP_EMBED = "";
+
+/* ===== AUDIO ===== */
+let playing = false;
+const bg = document.getElementById('bg-music'), ip = document.getElementById('ip'), ia = document.getElementById('ia');
+function setIcons(p){playing=p;ip.style.display=p?'none':'block';ia.style.display=p?'block':'none'}
+function toggleMusic(){ if(playing){bg.pause();setIcons(false)}else{bg.play();setIcons(true)} }
+
+/* ===== EFECTOS: destellos cayendo y estallido ===== */
+const fx = document.getElementById('fx');
+function spark(){
+  const s=document.createElement('div'), z=4+Math.random()*10;
+  s.className='sp'; s.style.cssText=`left:${Math.random()*100}%;width:${z}px;height:${z}px;--dx:${(Math.random()-.5)*120}px;animation-duration:${6+Math.random()*7}s`;
+  fx.appendChild(s); setTimeout(()=>s.remove(),13500);
+}
+setInterval(spark,380);
+function burst(x,y){
+  for(let i=0;i<26;i++){
+    const b=document.createElement('div'), a=Math.random()*6.28, r=60+Math.random()*120;
+    b.className='burst'; b.style.cssText=`left:${x}px;top:${y}px;--bx:${Math.cos(a)*r}px;--by:${Math.sin(a)*r}px`;
+    fx.appendChild(b); setTimeout(()=>b.remove(),1500);
+  }
+}
+
+/* ===== SOBRE ===== */
+function openEnvelope(){
+  const w=document.querySelector('.envelope-wrapper'), r=w.getBoundingClientRect();
+  w.classList.add('open');
+  burst(r.left+r.width/2,r.top+r.height/2);
+  setTimeout(()=>burst(innerWidth*.25,innerHeight*.35),300);
+  setTimeout(()=>burst(innerWidth*.75,innerHeight*.3),550);
+  setTimeout(()=>{
+    document.getElementById('envelope-screen').classList.add('fade-out');
+    document.body.classList.add('content-active');
+    bg.play().then(()=>setIcons(true)).catch(()=>setIcons(false));
+  },1000);
+}
+
+/* ===== ANIMACIÓN AL HACER SCROLL ===== */
+document.addEventListener("DOMContentLoaded",()=>{
+  const io=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target)}}),{threshold:.15});
+  document.querySelectorAll('.an').forEach(el=>io.observe(el));
+  if(MAP_EMBED) document.getElementById('map-frame').src=MAP_EMBED; else document.getElementById('map-box').style.display='none';
+});
+
+/* ===== CUENTA ATRÁS ===== */
+function tick(){
+  let d=EVENT_DATE-new Date(); if(d<0)d=0;
+  const s=Math.floor(d/1000);
+  document.getElementById('cd-d').textContent=Math.floor(s/86400);
+  document.getElementById('cd-h').textContent=String(Math.floor(s%86400/3600)).padStart(2,'0');
+  document.getElementById('cd-m').textContent=String(Math.floor(s%3600/60)).padStart(2,'0');
+  document.getElementById('cd-s').textContent=String(s%60).padStart(2,'0');
+}
+tick(); setInterval(tick,1000);
+
+/* ===== PASES ===== */
+// Agrega invitados: "1": { nombre: "Familia Pérez", pases: 4 }
+const dbInvitados = {};
+const q=new URLSearchParams(location.search);
+const pid=q.get('id'), pp=q.get('p')||q.get('pases');
+let pases=10, nombre="Invitado Especial";
+if(pid&&dbInvitados[pid]){
+  pases=dbInvitados[pid].pases; nombre=dbInvitados[pid].nombre;
+  const n=document.getElementById('rsvp-name'); n.value=nombre; n.disabled=true;
+}else if(pp&&!isNaN(pp)) pases=parseInt(pp);
+if(pases>0&&((pid&&dbInvitados[pid])||pp)){
+  const s=document.getElementById('pases'); s.style.display='flex';
+  document.getElementById('t-count').textContent=pases;
+  if(pid&&dbInvitados[pid]) document.getElementById('t-name').textContent=nombre;
+}
+const st=document.getElementById('rsvp-status'), gs=document.getElementById('rsvp-guests');
+st.addEventListener('change',e=>{
+  if(e.target.value==='yes'){
+    gs.style.display='block';
+    gs.innerHTML='<option value="" disabled selected>¿Cuántas personas asisten?</option>';
+    for(let i=1;i<=pases;i++) gs.innerHTML+=`<option value="${i}">${i} persona${i>1?'s':''}</option>`;
+  }else{gs.style.display='none';gs.value=''}
+});
+
+/* ===== WHATSAPP ===== */
+function sendRSVP(){
+  const name=document.getElementById('rsvp-name').value.trim(), s=st.value, g=gs.value;
+  if(!name||!s){alert("Por favor, escribe tu nombre y selecciona una opción de asistencia.");return}
+  if(s==='yes'&&!g){alert("Por favor, indica cuántas personas asistirán.");return}
+  const m=s==='yes'
+    ?`¡Hola! Soy ${name}. Sí, confirmo con gusto mi asistencia a los XV años de Regina. Seremos ${g} persona(s) en total.`
+    :`¡Hola! Soy ${name}. Lamentablemente no me será posible asistir a los XV años de Regina. Agradezco mucho la invitación.`;
+  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(m)}`,'_blank');
+}
+function sendWish(){
+  const n=document.getElementById('wish-name').value.trim(), w=document.getElementById('wish-message').value.trim();
+  if(!n||!w){alert("Por favor, ingresa tu nombre y tu mensaje.");return}
+  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(`Hola Regina, soy ${n}. Te envío este mensaje con mucho cariño:\n\n"${w}"`)}`,'_blank');
+}
+</script>
+</body>
+</html>
